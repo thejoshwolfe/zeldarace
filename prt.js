@@ -1,10 +1,11 @@
-var people = [];
+var people = {};
 function getElement(id) {
   return document.getElementById(id);
 }
 var people_list = getElement("people_list");
 function addPerson(person) {
-  people.push(person);
+  if (people[person.id]) return;
+  people[person.id] = person;
   var item = document.createElement("li");
   item.setAttribute("id", person.id);
   item.appendChild(document.createTextNode(person.id));
@@ -13,13 +14,7 @@ function addPerson(person) {
   item.appendChild(delete_button);
   people_list.appendChild(item);
   delete_button.addEventListener("click", function() {
-    var index;
-    people.forEach(function(p, i) {
-      if (p.id === person.id) {
-        index = i;
-      }
-    });
-    people.splice(index, 1);
+    delete people[person.id];
     people_list.removeChild(item);
     saveState();
   });
@@ -35,7 +30,9 @@ function saveState() {
 (function loadState() {
   if (localStorage.people) {
     var loaded_people = JSON.parse(localStorage.people);
-    loaded_people.forEach(addPerson);
+    for (var k in loaded_people) {
+      addPerson(loaded_people[k]);
+    }
   }
 })();
 
