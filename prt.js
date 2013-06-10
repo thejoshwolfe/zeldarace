@@ -38,6 +38,11 @@ function saveState() {
     loaded_people.forEach(addPerson);
   }
 })();
-function escapeHtml(text) {
-  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;");
-}
+
+var startAudioBtn = document.createElement("button");
+startAudioBtn.innerText = "Start!";
+var happyFunTimeAudio = new Audio("mario-kart.ogg");
+startAudioBtn.addEventListener("click", function() {
+  happyFunTimeAudio.play();
+});
+document.body.appendChild(startAudioBtn);
