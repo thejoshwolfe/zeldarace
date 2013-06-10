@@ -24,3 +24,12 @@ function saveState() {
     loaded_people.forEach(addPerson);
   }
 })();
+
+
+var startAudioBtn = document.createElement("button");
+startAudioBtn.innerText = "Start!";
+var happyFunTimeAudio = new Audio("mario-kart.ogg");
+startAudioBtn.addEventListener("click", function() {
+  happyFunTimeAudio.play();
+});
+document.body.appendChild(startAudioBtn);
