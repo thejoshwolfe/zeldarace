@@ -36,13 +36,10 @@ function saveState() {
   }
 })();
 
-var startAudioBtn = document.createElement("button");
-startAudioBtn.innerText = "Mario Cart";
 var happyFunTimeAudio = new Audio("mario-kart.ogg");
-startAudioBtn.addEventListener("click", function() {
+getElement("mario_cart_button").addEventListener("click", function() {
   happyFunTimeAudio.play();
 });
-document.body.appendChild(startAudioBtn);
 
 
 var checkpoints = [
