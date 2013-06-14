@@ -1,9 +1,18 @@
 <!doctype html>
-<html>
-  <body>
-    <ul id="people_list"></ul>
-    <input id="add_person_text"></input>
-    <button id="add_person_button">Add Person</button>
+<html ng-app="main">
+  <head>
+    <title>Zelda Race</title>
+  </head>
+  <body ng-controller="MainCtrl">
+    <ul>
+      <li ng-repeat="person in state.people">{{ person.name }}
+        <button ng-click="deletePerson($index)">Delete</button>
+      </li>
+    </ul>
+    <input ng-model="new_person_name">
+    <button ng-click="addPerson()">Add Person</button>
+    <button ng-click="doneWithSetup()">Done With Setup</button>
+    <script src="angular.js"></script>
     <script src="prt.js"></script>
   </body>
 </html>
