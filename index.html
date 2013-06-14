@@ -37,11 +37,19 @@
         <tr ng-repeat="person in state.people">
           <td><img ng-src="{{person.profile_img}}" alt="{{person.name}}" title="{{person.name}}" style="max-width: 60px"></td>
           <td ng-repeat="checkpoint in state.checkpoints">
-            {{ person.times[$index] | formatMs }}
+            <div ng-show="person.times[$index]">
+              {{ person.times[$index] | formatMs }}
+              <br>
+              {{ rupeesForCheckpoint(person, $index) }}
+            </div>
             <button ng-show="state.gameState == 'play' && state.current_checkpoint == $index && !person.times[$index]"
                     ng-click="personIsDone(person)">{{person.name}} Done</button>
           </td>
-          <td>{{ getTotal(person) | formatMs }}</td>
+          <td>
+            {{ totalTime(person) | formatMs }}
+            <br>
+            {{ totalRupees(person) }}
+          </td>
         </tr>
       </table>
       <button ng-show="state.gameState == 'ready'" ng-click="readySetGo()" style="width:100%; font-size:50px;">

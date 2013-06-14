@@ -115,12 +115,33 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     saveState();
   };
 
-  $scope.getTotal = function(person) {
+  $scope.totalTime = function(person) {
     var total_time = 0;
     person.times.forEach(function(time) {
       if (time) total_time += time;
     });
     return total_time;
+  };
+
+  $scope.rupeesForCheckpoint = function(person, checkpoint_index) {
+    var my_time = person.times[checkpoint_index];
+    if (!my_time) return "";
+    var rupees = 0;
+    $scope.state.people.forEach(function(other) {
+      var their_time = other.times[checkpoint_index];
+      if (their_time && my_time < their_time) rupees += 1;
+    });
+    return rupees;
+  };
+
+  $scope.totalRupees = function(person) {
+    var rupees = 0;
+    for (var i = 0; i < $scope.state.checkpoints.length; i++) {
+      var prt = $scope.rupeesForCheckpoint(person, i);
+      if (prt)
+        rupees += prt;
+    }
+    return rupees;
   };
 
   loadState();
