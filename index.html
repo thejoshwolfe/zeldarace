@@ -23,7 +23,7 @@
       <img src="img/lol/ZeldaLinkAni.gif">
       <img src="img/lol/tumblr_luk6zg0Xfd1qf86f3o1_400.gif">
     </div>
-    <div ng-show="state.gameState == 'ready' || state.gameState == 'play'">
+    <div ng-show="state.gameState == 'race'">
       <span id="clock" style="font-size:200px;"></span>
       <table>
         <tr>
@@ -45,7 +45,7 @@
               <br>
               {{ rupeesForCheckpoint(person, $index) }}
             </div>
-            <button ng-show="state.gameState == 'play' && state.current_checkpoint == $index && !person.times[$index]"
+            <button ng-show="state.checkpoints[$index].start && !person.times[$index]"
                     ng-click="personIsDone(person)">{{person.name}} Done</button>
           </td>
           <td>
@@ -55,7 +55,7 @@
           </td>
         </tr>
       </table>
-      <button ng-show="state.gameState == 'ready'" ng-click="readySetGo()" style="width:100%; font-size:50px;">
+      <button ng-show="readyToStart()" ng-click="readySetGo()" style="width:100%; font-size:50px;">
         <div style="position: relative; left: 0; top: 0;">
           <img src="img/logo.png" class="fadeout" style="position: relative; top: 0; left: 0; width: 200px;">
           <img ng-src="{{ currentCheckpoint().img_src }}" class="fadein" style="position: absolute; top: 35%; left: 40%; max-width: 140px;">

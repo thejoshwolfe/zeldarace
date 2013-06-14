@@ -82,13 +82,28 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
   };
 
   $scope.startGame = function() {
-    $scope.state.gameState = 'ready';
+    $scope.state.gameState = 'race';
     saveState();
   };
 
   $scope.backToSetup = function() {
     $scope.state.gameState = 'setup';
     saveState();
+  };
+
+  $scope.readyToStart = function() {
+    if ($scope.state.gameState !== "race") return false;
+    if (!$scope.currentCheckpoint()) return false;
+    return !$scope.theClockIsTicking();
+  };
+
+  $scope.theClockIsTicking = function() {
+    if ($scope.state.gameState !== "race") return false;
+    if (!$scope.currentCheckpoint())       return false;
+    if (!$scope.currentCheckpoint().start) return false;
+    return $scope.state.people.some(function(person) {
+      return !person.times[$scope.state.current_checkpoint];
+    });
   };
 
   $scope.currentCheckpoint = function() {
@@ -99,7 +114,6 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     var checkpoint = $scope.currentCheckpoint();
     // mario kart gives an 8 second count down
     checkpoint.start = new Date(new Date().getTime() + 8000);
-    $scope.state.gameState = 'play';
     saveState();
     happyFunTimeAudio.play();
   };
@@ -113,9 +127,7 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
       return !!person.times[checkpoint_index];
     });
     if (all_done) {
-      $scope.state.gameState = 'ready';
       $scope.state.current_checkpoint += 1;
-      document.title = "Zelda Race - ";
     }
     saveState();
   };
@@ -152,12 +164,12 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
 
   requestAnimationFrame(function animateClock() {
     var clock = document.getElementById("clock");
-    if ($scope.state.gameState !== 'play') {
-      clock.style.display = "none";
-    } else {
+    if ($scope.theClockIsTicking()) {
       clock.style.display = "";
       var start = $scope.currentCheckpoint().start;
       clock.innerText = formatMs(new Date() - start, true);
+    } else {
+      clock.style.display = "none";
     }
     requestAnimationFrame(animateClock);
   });
