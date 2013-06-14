@@ -53,6 +53,16 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     saveState();
   };
 
+  $scope.startGame = function() {
+    $scope.state.gameState = 'game';
+    saveState();
+  };
+
+  $scope.backToSetup = function() {
+    $scope.state.gameState = 'setup';
+    saveState();
+  };
+
   loadState();
 
   function saveState() {
