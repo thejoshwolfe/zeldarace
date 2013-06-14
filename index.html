@@ -42,7 +42,12 @@
           </td>
         </tr>
       </table>
-      <button ng-show="state.gameState == 'ready'" ng-click="readySetGo()" style="width:100%; height:500px; font-size:50px;">START GO!!!!!!</button>
+      <button ng-show="state.gameState == 'ready'" ng-click="readySetGo()" style="width:100%; font-size:50px;">
+        <img src="img/logo.png">
+        <img ng-src="{{ currentCheckpoint().img_src }}">
+        <br>
+        START GO!!!!!!
+      </button>
       <br>
       <img src="img/lol/link.gif">
       <img src="img/lol/original.gif">

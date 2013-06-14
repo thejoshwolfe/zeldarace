@@ -88,8 +88,12 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     saveState();
   };
 
+  $scope.currentCheckpoint = function() {
+    return $scope.state.checkpoints[$scope.state.current_checkpoint];
+  };
+
   $scope.readySetGo = function() {
-    var checkpoint = $scope.state.checkpoints[$scope.state.current_checkpoint];
+    var checkpoint = $scope.currentCheckpoint();
     checkpoint.start = new Date();
     $scope.state.gameState = 'play';
     saveState();
@@ -98,7 +102,7 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
 
   $scope.personIsDone = function(person) {
     var checkpoint_index = $scope.state.current_checkpoint;
-    var checkpoint = $scope.state.checkpoints[checkpoint_index];
+    var checkpoint = $scope.currentCheckpoint();
     var end_time = new Date();
     person.times[checkpoint_index] = end_time - checkpoint.start;
     var all_done = $scope.state.people.every(function(person) {
