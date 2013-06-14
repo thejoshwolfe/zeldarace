@@ -35,8 +35,16 @@
             <br>
             {{ checkpoint.name }}
           </th>
-          <th>Total Time</th>
-          <th>Total Rupees</th>
+          <th>
+            <img src="img/net.png" style="width:60px">
+            <br>
+            Net Time
+          </th>
+          <th>
+            <img src="img/wallet.png" style="width:60px">
+            <br>
+            Rupees
+          </th>
         </tr>
         <tr ng-repeat="person in state.people">
           <td><img ng-src="{{person.profile_img}}" alt="{{person.name}}" title="{{person.name}}" style="max-width: 60px"></td>
