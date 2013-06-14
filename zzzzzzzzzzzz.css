@@ -1,0 +1,18 @@
+.fadein {
+  -webkit-animation: fadein 1s infinite;
+  -webkit-animation-direction: alternate;
+}
+
+.fadeout {
+  -webkit-animation: fadein 1s infinite;
+  -webkit-animation-direction: alternate-reverse;
+}
+
+@-webkit-keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

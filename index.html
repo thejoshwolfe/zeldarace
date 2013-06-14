@@ -2,6 +2,7 @@
 <html ng-app="main">
   <head>
     <title>Zelda Race</title>
+    <link rel="stylesheet" href="zzzzzzzzzzzz.css">
   </head>
   <body ng-controller="MainCtrl">
     <div ng-show="state.gameState == 'setup'">
@@ -53,9 +54,10 @@
         </tr>
       </table>
       <button ng-show="state.gameState == 'ready'" ng-click="readySetGo()" style="width:100%; font-size:50px;">
-        <img src="img/logo.png">
-        <img ng-src="{{ currentCheckpoint().img_src }}">
-        <br>
+        <div style="position: relative; left: 0; top: 0;">
+          <img src="img/logo.png" class="fadeout" style="position: relative; top: 0; left: 0; width: 200px;">
+          <img ng-src="{{ currentCheckpoint().img_src }}" class="fadein" style="position: absolute; top: 35%; left: 40%; max-width: 140px;">
+        </div>
         START GO!!!!!!
       </button>
       <br>

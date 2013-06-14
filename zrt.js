@@ -1,5 +1,7 @@
 
 window.APP = window.angular.module('main', []).controller('MainCtrl', function($scope) {
+  var happyFunTimeAudio = new Audio("mario-kart.ogg");
+
   $scope.state = {
     people: [
       {
@@ -158,8 +160,6 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
       });
     }
   }
-
-  var happyFunTimeAudio = new Audio("mario-kart.ogg");
 
 });
 
