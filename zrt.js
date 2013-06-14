@@ -99,6 +99,7 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     var checkpoint = $scope.currentCheckpoint();
     // mario kart gives an 8 second count down
     checkpoint.start = new Date(new Date().getTime() + 8000);
+    document.title = checkpoint.name + " - Zelda Race - ";
     $scope.state.gameState = 'play';
     saveState();
     happyFunTimeAudio.play();
@@ -115,6 +116,7 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     if (all_done) {
       $scope.state.gameState = 'ready';
       $scope.state.current_checkpoint += 1;
+      document.title = "Zelda Race - ";
     }
     saveState();
   };
@@ -208,3 +210,8 @@ window.APP.filter('formatMs', function() {
 });
 
 window.APP.run();
+
+setInterval(updateTitle, 200);
+function updateTitle() {
+  document.title = document.title.substring(1, document.title.length) + document.title[0];
+}
