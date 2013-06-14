@@ -131,7 +131,7 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     var rupees = 0;
     $scope.state.people.forEach(function(other) {
       var their_time = other.times[checkpoint_index];
-      if (their_time && my_time < their_time) rupees += 1;
+      if (!their_time || my_time < their_time) rupees += 1;
     });
     return rupees;
   };
@@ -140,8 +140,7 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     var rupees = 0;
     for (var i = 0; i < $scope.state.checkpoints.length; i++) {
       var prt = $scope.rupeesForCheckpoint(person, i);
-      if (prt)
-        rupees += prt;
+      if (prt) rupees += prt;
     }
     return rupees;
   };
