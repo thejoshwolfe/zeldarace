@@ -1,6 +1,7 @@
 
 window.APP = window.angular.module('main', []).controller('MainCtrl', function($scope) {
   var happyFunTimeAudio = new Audio("mario-kart.ogg");
+  var requestAnimationFrame = window.requestAnimationFrame;
 
   $scope.state = {
     people: [
@@ -96,7 +97,8 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
 
   $scope.readySetGo = function() {
     var checkpoint = $scope.currentCheckpoint();
-    checkpoint.start = new Date();
+    // mario kart gives an 8 second count down
+    checkpoint.start = new Date(new Date().getTime() + 8000);
     $scope.state.gameState = 'play';
     saveState();
     happyFunTimeAudio.play();
@@ -147,6 +149,18 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
 
   loadState();
 
+  requestAnimationFrame(function animateClock() {
+    var clock = document.getElementById("clock");
+    if ($scope.state.gameState !== 'play') {
+      clock.style.display = "none";
+    } else {
+      clock.style.display = "";
+      var start = $scope.currentCheckpoint().start;
+      clock.innerText = formatMs(new Date() - start, true);
+    }
+    requestAnimationFrame(animateClock);
+  });
+
   function saveState() {
     localStorage.state = window.angular.toJson($scope.state);
   }
@@ -162,22 +176,35 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
 
 });
 
+function formatMs(ms, include_ms) {
+  if (!ms) return "";
+  var result = "";
+  if (ms < 0) {
+    result += "-";
+    ms = -ms;
+  }
+  var hours = Math.floor(ms / (60 * 60 * 1000));
+
+  var minutes = Math.floor((ms / 60000) % 60);
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+
+  var seconds = Math.floor((ms / 1000) % 60);
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+  result += hours + ":" + minutes + ":" + seconds;
+  if (include_ms) {
+    var millis = "" + (ms % 1000);
+    while (millis.length < 3) millis = "0" + millis;
+    result += "." + millis;
+  }
+  return result;
+}
+
 window.APP.filter('formatMs', function() {
-  return function formatMs(ms) {
-    if (!ms) return "";
-    var hours = Math.floor(ms / (60 * 60 * 1000));
-
-    var minutes = Math.floor((ms / 60000) % 60);
-    if (minutes < 10) {
-      minutes = "0" + minutes;
-    }
-
-    var seconds = Math.floor((ms / 1000) % 60);
-    if (seconds < 10) {
-      seconds = "0" + seconds;
-    }
-    return hours + ":" + minutes + ":" + seconds;
-  };
+  return formatMs;
 });
 
 window.APP.run();
