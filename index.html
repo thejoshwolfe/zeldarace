@@ -27,7 +27,9 @@
       <button ng-click="backToSetup()">Back</button>
       <table>
         <tr>
-          <th></th>
+          <th>
+            <img src="img/owl.png" style="width:80px">
+          </th>
           <th ng-repeat="checkpoint in state.checkpoints">
             <img ng-src="{{checkpoint.img_src}}" title="{{checkpoint.desc}}" style="max-width: 60px">
             <br>
