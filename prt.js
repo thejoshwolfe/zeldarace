@@ -1,7 +1,18 @@
 
 window.APP = window.angular.module('main', []).controller('MainCtrl', function($scope) {
   $scope.state = {
-    people: [],
+    people: [
+      {
+        name: "Andy",
+        times: [],
+        profile_img: "img/faces/andy.png",
+      },
+      {
+        name: "Josh",
+        times: [],
+        profile_img: "img/faces/josh_wolfe.png",
+      },
+    ],
     gameState: 'setup',
     checkpoints: [
       {
