@@ -127,4 +127,22 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
 
 });
 
+window.APP.filter('formatMs', function() {
+  return function formatMs(ms) {
+    if (!ms) return '0:00:00';
+    var hours = Math.floor(ms / (60 * 60 * 1000));
+
+    var minutes = Math.floor((ms / 60000) % 60);
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+
+    var seconds = Math.floor((ms / 1000) % 60);
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+    return hours + ":" + minutes + ":" + seconds;
+  };
+});
+
 window.APP.run();
