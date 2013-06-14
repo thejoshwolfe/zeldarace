@@ -1,7 +1,7 @@
 <!doctype html>
 <html ng-app="main">
   <head>
-    <title>Zelda Race</title>
+    <title>Zelda Race - </title>
     <link rel="stylesheet" href="zzzzzzzzzzzz.css">
   </head>
   <body ng-controller="MainCtrl">
@@ -24,7 +24,6 @@
       <img src="img/lol/tumblr_luk6zg0Xfd1qf86f3o1_400.gif">
     </div>
     <div ng-show="state.gameState == 'ready' || state.gameState == 'play'">
-      <button ng-click="backToSetup()">Back</button>
       <table>
         <tr>
           <th>
@@ -65,6 +64,8 @@
       <br>
       <img src="img/lol/link.gif">
       <img src="img/lol/original.gif">
+      <br>
+      <button ng-click="backToSetup()">Back</button>
     </div>
     <script src="angular.js"></script>
     <script src="zrt.js"></script>
