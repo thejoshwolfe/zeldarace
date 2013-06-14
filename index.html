@@ -6,18 +6,21 @@
   <body ng-controller="MainCtrl">
     <div ng-show="state.gameState == 'setup'">
       <ul>
-        <li ng-repeat="person in state.people">{{ person.name }}
+        <li ng-repeat="person in state.people">
+        <img ng-src="{{ person.profile_img }}" style="max-width:60px">
+        <input ng-model="person.name" placeholder="name">
+        <input ng-model="person.profile_img" placeholder="profile img src">
           <button ng-click="deletePerson($index)">Delete</button>
         </li>
       </ul>
-      <input ng-model="new_person_name">
       <button ng-click="addPerson()">Add Person</button>
+      <button ng-click="save()">Save</button>
       <button ng-click="startGame()">Start Game</button>
       <br>
-      <img src="img/Link_sword.gif">
-      <img src="img/animated.gif">
-      <img src="img/ZeldaLinkAni.gif">
-      <img src="img/tumblr_luk6zg0Xfd1qf86f3o1_400.gif">
+      <img src="img/lol/Link_sword.gif">
+      <img src="img/lol/animated.gif">
+      <img src="img/lol/ZeldaLinkAni.gif">
+      <img src="img/lol/tumblr_luk6zg0Xfd1qf86f3o1_400.gif">
     </div>
     <div ng-show="state.gameState == 'ready' || state.gameState == 'play'">
       <button ng-click="backToSetup()">Back</button>
@@ -34,8 +37,8 @@
       <button ng-show="state.gameState == 'ready'" ng-click="readySetGo()" style="width:100%; height:500px; font-size:50px;">START GO!!!!!!</button>
       <button ng-show="state.gameState == 'play'" ng-click="everyoneWins()" style="width:100%; height:100px;">Everyone Is Done</button>
       <br>
-      <img src="img/link.gif">
-      <img src="img/original.gif">
+      <img src="img/lol/link.gif">
+      <img src="img/lol/original.gif">
     </div>
     <script src="angular.js"></script>
     <script src="prt.js"></script>
