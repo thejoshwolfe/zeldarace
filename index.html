@@ -19,7 +19,7 @@
       <img src="img/ZeldaLinkAni.gif">
       <img src="img/tumblr_luk6zg0Xfd1qf86f3o1_400.gif">
     </div>
-    <div ng-show="state.gameState == 'game'">
+    <div ng-show="state.gameState == 'ready' || state.gameState == 'play'">
       <button ng-click="backToSetup()">Back</button>
       <table>
         <th>
@@ -28,10 +28,11 @@
         </th>
         <tr ng-repeat="person in state.people">
           <td>{{ person.name }}</td>
-          <td ng-repeat="checkpoint in state.checkpoints">{{ person.times[checkpoint.name] }}</td>
+          <td ng-repeat="checkpoint in state.checkpoints">{{ person.times[$index] }}</td>
         </tr>
       </table>
-      <button ng-click="readySetGo()" style="width:100%; height:500px; font-size:50px;">START GO!!!!!!</button>
+      <button ng-show="state.gameState == 'ready'" ng-click="readySetGo()" style="width:100%; height:500px; font-size:50px;">START GO!!!!!!</button>
+      <button ng-show="state.gameState == 'play'" ng-click="everyoneWins()" style="width:100%; height:100px;">Everyone Is Done</button>
       <br>
       <img src="img/link.gif">
       <img src="img/original.gif">

@@ -41,10 +41,11 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
         desc: "Pause",
       },
     ],
+    current_checkpoint: 0,
   };
 
   $scope.addPerson = function() {
-    $scope.state.people.push({name: $scope.new_person_name});
+    $scope.state.people.push({name: $scope.new_person_name, times: []});
     saveState();
   };
 
@@ -54,7 +55,7 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
   };
 
   $scope.startGame = function() {
-    $scope.state.gameState = 'game';
+    $scope.state.gameState = 'ready';
     saveState();
   };
 
@@ -64,7 +65,23 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
   };
 
   $scope.readySetGo = function() {
+    var checkpoint = $scope.state.checkpoints[$scope.state.current_checkpoint];
+    checkpoint.start = new Date();
+    $scope.state.gameState = 'play';
+    saveState();
     happyFunTimeAudio.play();
+  };
+
+  $scope.everyoneWins = function() {
+    var checkpoint_index = $scope.state.current_checkpoint;
+    var checkpoint = $scope.state.checkpoints[checkpoint_index];
+    $scope.state.current_checkpoint += 1;
+    var end_time = new Date();
+    $scope.state.people.forEach(function(person) {
+      person.times[checkpoint_index] = end_time - checkpoint.start;
+    });
+    $scope.state.gameState = 'ready';
+    saveState();
   };
 
   loadState();
@@ -76,6 +93,9 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
   function loadState() {
     if (localStorage.state) {
       $scope.state = window.angular.fromJson(localStorage.state);
+      $scope.state.checkpoints.forEach(function(checkpoint) {
+        if (checkpoint.start) checkpoint.start = new Date(checkpoint.start);
+      });
     }
   }
 
