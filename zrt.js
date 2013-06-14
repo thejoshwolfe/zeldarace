@@ -115,6 +115,14 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     saveState();
   };
 
+  $scope.getTotal = function(person) {
+    var total_time = 0;
+    person.times.forEach(function(time) {
+      if (time) total_time += time;
+    });
+    return total_time;
+  };
+
   loadState();
 
   function saveState() {
