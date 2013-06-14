@@ -28,14 +28,18 @@
         <tr>
           <th></th>
           <th ng-repeat="checkpoint in state.checkpoints">
-            <img ng-src="{{checkpoint.img_src}}" title="{{ checkpoint.desc }}" style="max-width: 60px">
+            <img ng-src="{{checkpoint.img_src}}" title="{{checkpoint.desc}}" style="max-width: 60px">
             <br>
             {{ checkpoint.name }}
           </th>
         </tr>
         <tr ng-repeat="person in state.people">
           <td><img ng-src="{{person.profile_img}}" alt="{{person.name}}" title="{{person.name}}" style="max-width: 60px"></td>
-          <td ng-repeat="checkpoint in state.checkpoints">{{ person.times[$index] | formatMs }}</td>
+          <td ng-repeat="checkpoint in state.checkpoints">
+            {{ person.times[$index] | formatMs }}
+            <button ng-show="state.gameState == 'play' && state.current_checkpoint == $index && !person.times[$index]"
+                    ng-click="personIsDone(person)">{{person.name}} Done</button>
+          </td>
         </tr>
       </table>
       <button ng-show="state.gameState == 'ready'" ng-click="readySetGo()" style="width:100%; height:500px; font-size:50px;">START GO!!!!!!</button>

@@ -96,15 +96,18 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     happyFunTimeAudio.play();
   };
 
-  $scope.everyoneWins = function() {
+  $scope.personIsDone = function(person) {
     var checkpoint_index = $scope.state.current_checkpoint;
     var checkpoint = $scope.state.checkpoints[checkpoint_index];
-    $scope.state.current_checkpoint += 1;
     var end_time = new Date();
-    $scope.state.people.forEach(function(person) {
-      person.times[checkpoint_index] = end_time - checkpoint.start;
+    person.times[checkpoint_index] = end_time - checkpoint.start;
+    var all_done = $scope.state.people.every(function(person) {
+      return !!person.times[checkpoint_index];
     });
-    $scope.state.gameState = 'ready';
+    if (all_done) {
+      $scope.state.gameState = 'ready';
+      $scope.state.current_checkpoint += 1;
+    }
     saveState();
   };
 
@@ -129,7 +132,7 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
 
 window.APP.filter('formatMs', function() {
   return function formatMs(ms) {
-    if (!ms) return '0:00:00';
+    if (!ms) return "";
     var hours = Math.floor(ms / (60 * 60 * 1000));
 
     var minutes = Math.floor((ms / 60000) % 60);
