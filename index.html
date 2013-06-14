@@ -16,6 +16,16 @@
     </div>
     <div ng-show="state.gameState == 'game'">
       <button ng-click="backToSetup()">Back</button>
+      <table>
+        <th>
+          <td></td>
+          <td ng-repeat="checkpoint in state.checkpoints">{{ checkpoint.name }}</td>
+        </th>
+        <tr ng-repeat="person in state.people">
+          <td>{{ person.name }}</td>
+          <td ng-repeat="checkpoint in state.checkpoints">{{ person.times[checkpoint.name] }}</td>
+        </tr>
+      </table>
     </div>
     <br>
     <img src="http://boourns.dynu.net/Link_sword.gif">
