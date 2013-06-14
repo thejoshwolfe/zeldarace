@@ -141,22 +141,37 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
   };
 
   $scope.rupeesForCheckpoint = function(person, checkpoint_index) {
-    var my_time = person.times[checkpoint_index];
+    return rupeesForSomething(person, function(person) {
+      return person.times[checkpoint_index];
+    });
+  };
+
+  function rupeesForSomething(person, timeForPerson) {
+    var my_time = timeForPerson(person);
     if (!my_time) return "";
     var rupees = 0;
     $scope.state.people.forEach(function(other) {
-      var their_time = other.times[checkpoint_index];
+      var their_time = timeForPerson(other);
       if (!their_time || my_time < their_time) rupees += 1;
     });
     return rupees;
+  }
+
+  $scope.rupeesForTotalTime = function(person) {
+    return rupeesForSomething(person, function(person) {
+      return $scope.totalTime(person);
+    });
   };
 
   $scope.totalRupees = function(person) {
     var rupees = 0;
+    var prt;
     for (var i = 0; i < $scope.state.checkpoints.length; i++) {
-      var prt = $scope.rupeesForCheckpoint(person, i);
+      prt = $scope.rupeesForCheckpoint(person, i);
       if (prt) rupees += prt;
     }
+    prt = $scope.rupeesForTotalTime(person);
+    if (prt) rupees += prt;
     return rupees;
   };
 

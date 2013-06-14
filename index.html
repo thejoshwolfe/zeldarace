@@ -35,7 +35,8 @@
             <br>
             {{ checkpoint.name }}
           </th>
-          <th>Total</th>
+          <th>Total Time</th>
+          <th>Total Rupees</th>
         </tr>
         <tr ng-repeat="person in state.people">
           <td><img ng-src="{{person.profile_img}}" alt="{{person.name}}" title="{{person.name}}" style="max-width: 60px"></td>
@@ -51,6 +52,9 @@
           <td>
             {{ totalTime(person) | formatMs }}
             <br>
+            {{ rupeesForTotalTime(person) }}
+          </td>
+          <td>
             {{ totalRupees(person) }}
           </td>
         </tr>
