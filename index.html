@@ -25,14 +25,14 @@
     <div ng-show="state.gameState == 'ready' || state.gameState == 'play'">
       <button ng-click="backToSetup()">Back</button>
       <table>
-        <th>
-          <td></td>
-          <td ng-repeat="checkpoint in state.checkpoints">
+        <tr>
+          <th></th>
+          <th ng-repeat="checkpoint in state.checkpoints">
             <img ng-src="{{checkpoint.img_src}}" title="{{ checkpoint.desc }}" style="max-width: 60px">
             <br>
             {{ checkpoint.name }}
-          </td>
-        </th>
+          </th>
+        </tr>
         <tr ng-repeat="person in state.people">
           <td><img ng-src="{{person.profile_img}}" alt="{{person.name}}" title="{{person.name}}" style="max-width: 60px"></td>
           <td ng-repeat="checkpoint in state.checkpoints">{{ person.times[$index] }}</td>
