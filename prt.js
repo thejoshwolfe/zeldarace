@@ -63,6 +63,10 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     saveState();
   };
 
+  $scope.readySetGo = function() {
+    happyFunTimeAudio.play();
+  };
+
   loadState();
 
   function saveState() {
@@ -76,7 +80,6 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
   }
 
   var happyFunTimeAudio = new Audio("mario-kart.ogg");
-  //happyFunTimeAudio.play();
 
 });
 
