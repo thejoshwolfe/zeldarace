@@ -16,3 +16,19 @@
     opacity: 1;
   }
 }
+
+
+table {
+  border: 0;
+  border-left: 16px solid transparent;
+  border-top: 16px solid transparent;
+  border-image: url("img/navi-tiled.png") 33% 33% repeat;
+}
+
+
+td,th {
+  border: 0;
+  border-bottom: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-image: url("img/navi-tiled.png") 33% 33% repeat;
+}
