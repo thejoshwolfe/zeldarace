@@ -13,6 +13,11 @@
       <input ng-model="new_person_name">
       <button ng-click="addPerson()">Add Person</button>
       <button ng-click="startGame()">Start Game</button>
+      <br>
+      <img src="img/Link_sword.gif">
+      <img src="img/animated.gif">
+      <img src="img/ZeldaLinkAni.gif">
+      <img src="img/tumblr_luk6zg0Xfd1qf86f3o1_400.gif">
     </div>
     <div ng-show="state.gameState == 'game'">
       <button ng-click="backToSetup()">Back</button>
@@ -26,9 +31,10 @@
           <td ng-repeat="checkpoint in state.checkpoints">{{ person.times[checkpoint.name] }}</td>
         </tr>
       </table>
+      <br>
+      <img src="img/link.gif">
+      <img src="img/original.gif">
     </div>
-    <br>
-    <img src="http://boourns.dynu.net/Link_sword.gif">
     <script src="angular.js"></script>
     <script src="prt.js"></script>
   </body>
