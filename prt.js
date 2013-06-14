@@ -6,38 +6,47 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     checkpoints: [
       {
         name: "Deku Tree",
+        img_src: "img/deku_stone.png",
         desc: "Pause immediately after the cutscene after...",
       },
       {
         name: "Dodongo's Cavern",
+        img_src: "img/goron_stone.png",
         desc: "Pause at some point...",
       },
       {
         name: "Adult Link",
+        img_src: "img/Light_Medallion.png",
         desc: "Pause",
       },
       {
         name: "Forest Temple",
+        img_src: "img/Forest_Medallion.png",
         desc: "Pause",
       },
       {
         name: "Fire Temple",
+        img_src: "img/Fire_Medallion.png",
         desc: "Pause",
       },
       {
         name: "Water Temple",
+        img_src: "img/Water_Medallion.png",
         desc: "Pause",
       },
       {
         name: "Shadow Temple",
+        img_src: "img/Shadow_Medallion.png",
         desc: "Pause",
       },
       {
         name: "Spirit Temple",
+        img_src: "img/Spirit_Medallion.png",
         desc: "Pause",
       },
       {
         name: "Ganon's Castle",
+        img_src: "img/triforce.png",
         desc: "Pause",
       },
     ],

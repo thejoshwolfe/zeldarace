@@ -27,10 +27,14 @@
       <table>
         <th>
           <td></td>
-          <td ng-repeat="checkpoint in state.checkpoints">{{ checkpoint.name }}</td>
+          <td ng-repeat="checkpoint in state.checkpoints">
+            <img ng-src="{{checkpoint.img_src}}" title="{{ checkpoint.desc }}" style="max-width: 60px">
+            <br>
+            {{ checkpoint.name }}
+          </td>
         </th>
         <tr ng-repeat="person in state.people">
-          <td>{{ person.name }}</td>
+          <td><img ng-src="{{person.profile_img}}" alt="{{person.name}}" title="{{person.name}}" style="max-width: 60px"></td>
           <td ng-repeat="checkpoint in state.checkpoints">{{ person.times[checkpoint.name] }}</td>
         </tr>
       </table>
