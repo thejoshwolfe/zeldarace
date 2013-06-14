@@ -44,7 +44,11 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
   };
 
   $scope.addPerson = function() {
-    $scope.state.people.push({name: $scope.new_person_name});
+    $scope.state.people.push({name: "new person"});
+    saveState();
+  };
+
+  $scope.save = function() {
     saveState();
   };
 
