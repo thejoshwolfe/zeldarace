@@ -1,6 +1,9 @@
 
 window.APP = window.angular.module('main', []).controller('MainCtrl', function($scope) {
   var happyFunTimeAudio = new Audio("mario-kart.ogg");
+  var mood_music_audio = new Audio("wrong-game.ogg");
+  mood_music_audio.loop = true;
+  window.mood_music_audio = mood_music_audio;
   var requestAnimationFrame = window.requestAnimationFrame;
 
   $scope.state = {
@@ -236,7 +239,15 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     }
   };
 
-  $scope.loadState = function() {
+  function playPauseMusic() {
+    if ($scope.state.gameState === "setup") {
+      mood_music_audio.play();
+    } else {
+      mood_music_audio.pause();
+    }
+  }
+
+  $scope.loadStateFromBox = function() {
     var text = save_textarea.value;
     var state;
     try {
@@ -287,6 +298,7 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
   function saveState() {
     sortPeople();
     localStorage.state = window.angular.toJson($scope.state);
+    playPauseMusic();
   }
 
   $scope.prettyState = function() {
@@ -301,6 +313,7 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
       });
       sortPeople();
     }
+    playPauseMusic();
   }
 
   $scope.resetState = function() {
