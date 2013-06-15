@@ -263,9 +263,9 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
 
   function sortPeople() {
     // reorder everyone according to their wealth
-    $scope.state.people.sort(function(a, b) {
-      a = $scope.totalRupees(a);
-      b = $scope.totalRupees(b);
+    $scope.state.people.sort(function(person_a, person_b) {
+      var a = $scope.totalRupees(person_a);
+      var b = $scope.totalRupees(person_b);
       return a<b ? 1 : a>b ? -1 : 0;
     });
   }
