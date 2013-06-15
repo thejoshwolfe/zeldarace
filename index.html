@@ -52,7 +52,7 @@
             <div ng-show="person.times[$index]">
               {{ person.times[$index] | formatMs }}
               <br>
-              {{ rupeesForCheckpoint(person, $index) }}
+              <div rupee-display rupee-count="rupeesForCheckpoint(person, $index)"></div>
             </div>
             <button ng-show="state.checkpoints[$index].start && !person.times[$index]"
                     ng-click="personIsDone(person)">{{person.name}} Done</button>
@@ -60,10 +60,10 @@
           <td>
             {{ totalTime(person) | formatMs }}
             <br>
-            {{ rupeesForTotalTime(person) }}
+            <div rupee-display rupee-count="rupeesForTotalTime(person)"></div>
           </td>
           <td>
-            {{ totalRupees(person) }}
+            <div rupee-display rupee-count="totalRupees(person)"></div>
           </td>
         </tr>
       </table>

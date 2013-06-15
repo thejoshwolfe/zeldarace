@@ -32,3 +32,17 @@ td,th {
   border-right: 16px solid transparent;
   border-image: url("img/navi-tiled.png") 33% 33% repeat;
 }
+
+.rupee-display {
+  font-size: 24px;
+  font-family: monospace;
+}
+.rupee-display span {
+  margin-right: 8px;
+}
+.rupee-display img {
+  -webkit-transform: rotate(45deg);
+  margin-right: 4px;
+  max-width: 16px;
+  vertical-align: middle;
+}

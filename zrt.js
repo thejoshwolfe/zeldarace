@@ -253,5 +253,33 @@ window.APP.filter('formatMs', function() {
   return formatMs;
 });
 
+window.APP.directive('rupeeDisplay', function() {
+  return {
+    template: '<div class="rupee-display">' +
+              '<span ng-show="red"><img src="img/rupee-red.png">{{ red }}</span>' +
+              '<span ng-show="blue"><img ng-show="blue" src="img/rupee-blue.png">{{ blue }}</span>' +
+              '<span ng-show="green"><img ng-show="green" src="img/rupee-green.png">{{ green }}</span>' +
+              '</div>',
+    link: zelda,
+    replace: true,
+    scope: true,
+  };
+  function zelda($scope, elem, attrs) {
+    refresh();
+    $scope.$watch(refresh);
+
+    function refresh() {
+      var total = $scope.$eval(attrs.rupeeCount);
+      $scope.red = Math.floor(total / 20);
+      total -= $scope.red * 20;
+
+      $scope.blue = Math.floor((total - $scope.red * 20) / 5);
+      total -= $scope.blue * 5;
+
+      $scope.green = total;
+    }
+  }
+});
+
 window.APP.run();
 
