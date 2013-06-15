@@ -208,13 +208,34 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
 
   requestAnimationFrame(function animateClock() {
     var clock = document.getElementById("clock");
+    var standby = document.getElementById("light-standby");
+    var ready = document.getElementById("light-ready");
+    var set = document.getElementById("light-set");
+    var go = document.getElementById("light-go");
+
+    var displayClock = false;
+    var displayStandby = false;
+    var displayReady = false;
+    var displaySet = false;
+    var displayGo = false;
     if ($scope.theClockIsTicking()) {
-      clock.style.display = "";
       var start = $scope.currentCheckpoint().start;
-      clock.innerText = formatMs(new Date() - start, true);
-    } else {
-      clock.style.display = "none";
+      var timeSinceStart = new Date() - start;
+      clock.innerText = formatMs(timeSinceStart, true);
+
+      displayStandby = timeSinceStart < -2000;
+      displayReady = timeSinceStart >= -2000 && timeSinceStart < -1000;
+      displaySet = timeSinceStart >= -1000 && timeSinceStart < 0;
+      displayGo = timeSinceStart >= 0 && timeSinceStart < 2000;
+      displayClock = timeSinceStart >= 0;
     }
+
+    clock.style.display = displayClock ? "" : "none";
+    standby.style.display = displayStandby ? "" : "none";
+    ready.style.display = displayReady ? "" : "none";
+    set.style.display = displaySet ? "" : "none";
+    go.style.display = displayGo ? "" : "none";
+
     requestAnimationFrame(animateClock);
   });
 

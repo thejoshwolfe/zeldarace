@@ -24,6 +24,10 @@
       <img src="img/lol/animated.gif">
     </div>
     <div ng-show="state.gameState == 'race'">
+      <img src="img/standby.png" id="light-standby">
+      <img src="img/ready.png" id="light-ready">
+      <img src="img/set.png" id="light-set">
+      <img src="img/go.png" id="light-go">
       <span id="clock" style="font-size:200px;"></span>
       <button ng-show="readyToStart()" ng-click="readySetGo()" style="width:100%; font-size:50px;">
         <div style="position: relative; left: 0; top: 0;">
