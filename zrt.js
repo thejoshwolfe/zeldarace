@@ -189,18 +189,22 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     requestAnimationFrame(animateClock);
   });
 
+  var save_textarea = document.getElementById("save_textarea");
+  var lense_of_truth = document.getElementById("lense_of_truth");
+  var load_state_button = document.getElementById("load_state_button");
   function hideState() {
-    document.getElementById("save_textarea").style.display = "none";
-    document.getElementById("lense_of_truth").innerText = "Show State";
+    save_textarea.style.display = "none";
+    load_state_button.style.display = "none";
+    lense_of_truth.innerText = "Show State";
   }
 
   $scope.lenseOfTruth = function() {
-    var textarea = document.getElementById("save_textarea");
-    if (textarea.style.display === "none") {
-      textarea.style.display = "";
-      textarea.select();
-      textarea.focus();
-      document.getElementById("lense_of_truth").innerText = "Hide State";
+    if (save_textarea.style.display === "none") {
+      save_textarea.style.display = "";
+      load_state_button.style.display = "";
+      save_textarea.select();
+      save_textarea.focus();
+      lense_of_truth.innerText = "Hide State";
       document.body.scrollTop = 1e10;
     } else {
       hideState();
@@ -208,8 +212,7 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
   };
 
   $scope.loadState = function() {
-    var textarea = document.getElementById("save_textarea");
-    var text = textarea.value;
+    var text = save_textarea.value;
     var state;
     try {
       state = window.angular.fromJson(text);
@@ -236,6 +239,13 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
       });
     }
   }
+
+  $scope.resetState = function() {
+    if (confirm("delete all 50 states?")) {
+      localStorage.clear();
+      location.href = location.href;
+    }
+  };
 
   function currentTitle() {
     if ($scope.state.gameState === "play") {
