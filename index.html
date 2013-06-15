@@ -18,10 +18,10 @@
       <button ng-click="save()">Save</button>
       <button ng-click="startGame()">Start Game</button>
       <br>
+      <img src="img/lol/slashing_link.gif" style="width:200px">
+      <img src="img/lol/ZeldaLinkAni.gif">
       <img src="img/lol/Link_sword.gif">
       <img src="img/lol/animated.gif">
-      <img src="img/lol/ZeldaLinkAni.gif">
-      <img src="img/lol/tumblr_luk6zg0Xfd1qf86f3o1_400.gif">
     </div>
     <div ng-show="state.gameState == 'race'">
       <span id="clock" style="font-size:200px;"></span>
@@ -32,6 +32,7 @@
         </div>
         START GO!!!!!!
       </button>
+      <img ng-show="isGameOver()" src="img/lol/triforce_video.gif">
       <table>
         <tr>
           <th>

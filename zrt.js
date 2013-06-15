@@ -126,6 +126,11 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     });
   };
 
+  $scope.isGameOver = function() {
+    if ($scope.state.gameState !== "race") return false;
+    return !$scope.currentCheckpoint();
+  };
+
   $scope.currentCheckpoint = function() {
     return $scope.state.checkpoints[$scope.state.current_checkpoint];
   };
