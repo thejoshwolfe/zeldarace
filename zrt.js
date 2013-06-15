@@ -189,18 +189,21 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     requestAnimationFrame(animateClock);
   });
 
+  function hideState() {
+    document.getElementById("save_textarea").style.display = "none";
+    document.getElementById("lense_of_truth").innerText = "Show State";
+  }
+
   $scope.lenseOfTruth = function() {
-    var button = document.getElementById("lense_of_truth");
     var textarea = document.getElementById("save_textarea");
     if (textarea.style.display === "none") {
       textarea.style.display = "";
       textarea.select();
       textarea.focus();
-      button.innerText = "Hide State";
+      document.getElementById("lense_of_truth").innerText = "Hide State";
       document.body.scrollTop = 1e10;
     } else {
-      textarea.style.display = "none";
-      button.innerText = "Show State";
+      hideState();
     }
   };
 
@@ -211,9 +214,10 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     try {
       state = window.angular.fromJson(text);
     } catch (e) {
+      return alert(e);
     }
     loadState(state);
-    textarea.style.display = "none";
+    hideState();
   };
 
   function saveState() {
