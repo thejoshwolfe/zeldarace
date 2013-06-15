@@ -53,7 +53,7 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
       },
       {
         name: "Adult Link",
-        img_src: "img/Light_Medallion.png",
+        img_src: "img/multi_award.png",
         desc: "Pause",
       },
       {
