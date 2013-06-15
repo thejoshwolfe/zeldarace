@@ -57,7 +57,7 @@
           <td>
             <div style="position: relative;">
               <img ng-src="{{person.profile_img}}" alt="{{person.name}}" title="{{person.name}}" style="max-width: 60px;">
-              <span class="rank">{{ rank($index) }}</span>
+              <span class="rank">{{ rank(person) }}</span>
             </div>
           </td>
           <td ng-repeat="checkpoint in state.checkpoints">

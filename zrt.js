@@ -253,7 +253,21 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     });
   }
 
-  $scope.rank = function(index) {
+  $scope.rank = function(targetPerson) {
+    var lastRank = -1;
+    var lastScore = Infinity;
+    for (var i = 0; i < $scope.state.people.length; ++i) {
+      var person = $scope.state.people[i];
+      var score = $scope.totalRupees(person);
+      if (score < lastScore) {
+        lastRank = i;
+        lastScore = score;
+      }
+      if (person === targetPerson) return rankToString(lastRank);
+    }
+  };
+
+  function rankToString(index) {
     switch (index) {
       case 0: return "1st";
       case 1: return "2nd";
@@ -263,7 +277,7 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
       case 22: return "23rd";
       default: return (index + 1) + "th";
     }
-  };
+  }
 
   function saveState() {
     sortPeople();
