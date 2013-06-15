@@ -25,6 +25,13 @@
     </div>
     <div ng-show="state.gameState == 'race'">
       <span id="clock" style="font-size:200px;"></span>
+      <button ng-show="readyToStart()" ng-click="readySetGo()" style="width:100%; font-size:50px;">
+        <div style="position: relative; left: 0; top: 0;">
+          <img src="img/logo.png" class="fadeout" style="position: relative; top: 0; left: 0; width: 200px;">
+          <img ng-src="{{ currentCheckpoint().img_src }}" class="fadein" style="position: absolute; top: 35%; left: 40%; max-width: 140px;">
+        </div>
+        START GO!!!!!!
+      </button>
       <table>
         <tr>
           <th>
@@ -67,13 +74,6 @@
           </td>
         </tr>
       </table>
-      <button ng-show="readyToStart()" ng-click="readySetGo()" style="width:100%; font-size:50px;">
-        <div style="position: relative; left: 0; top: 0;">
-          <img src="img/logo.png" class="fadeout" style="position: relative; top: 0; left: 0; width: 200px;">
-          <img ng-src="{{ currentCheckpoint().img_src }}" class="fadein" style="position: absolute; top: 35%; left: 40%; max-width: 140px;">
-        </div>
-        START GO!!!!!!
-      </button>
       <br>
       <img src="img/lol/link.gif">
       <img src="img/lol/original.gif">
