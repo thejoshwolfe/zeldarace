@@ -175,7 +175,7 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     return rupees;
   };
 
-  loadState();
+  loadState(localStorage.state);
 
   requestAnimationFrame(function animateClock() {
     var clock = document.getElementById("clock");
@@ -189,13 +189,44 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     requestAnimationFrame(animateClock);
   });
 
+  $scope.lenseOfTruth = function() {
+    var button = document.getElementById("lense_of_truth");
+    var textarea = document.getElementById("save_textarea");
+    if (textarea.style.display === "none") {
+      textarea.style.display = "";
+      textarea.select();
+      textarea.focus();
+      button.innerText = "Hide State";
+      document.body.scrollTop = 1e10;
+    } else {
+      textarea.style.display = "none";
+      button.innerText = "Show State";
+    }
+  };
+
+  $scope.loadState = function() {
+    var textarea = document.getElementById("save_textarea");
+    var text = textarea.value;
+    var state;
+    try {
+      state = window.angular.fromJson(text);
+    } catch (e) {
+    }
+    loadState(state);
+    textarea.style.display = "none";
+  };
+
   function saveState() {
     localStorage.state = window.angular.toJson($scope.state);
   }
 
-  function loadState() {
-    if (localStorage.state) {
-      $scope.state = window.angular.fromJson(localStorage.state);
+  $scope.prettyState = function() {
+    return window.angular.toJson($scope.state, true);
+  };
+
+  function loadState(state) {
+    if (state) {
+      $scope.state = window.angular.fromJson(state);
       $scope.state.checkpoints.forEach(function(checkpoint) {
         if (checkpoint.start) checkpoint.start = new Date(checkpoint.start);
       });

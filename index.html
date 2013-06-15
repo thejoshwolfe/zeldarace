@@ -81,6 +81,12 @@
       <br>
       <button ng-click="backToSetup()">Back</button>
     </div>
+    <div>
+      <button id="lense_of_truth" ng-click="lenseOfTruth()">Show Sate</button>
+      <button ng-click="loadState()">Load This State</button>
+      <br>
+      <textarea id="save_textarea" style="display:none;" rows=25 cols=100>{{ prettyState() }}</textarea>
+    </div>
     <script src="angular.js"></script>
     <script src="zrt.js"></script>
   </body>
