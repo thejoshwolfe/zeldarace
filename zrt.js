@@ -332,12 +332,7 @@ window.APP.filter('formatMs', function() {
 
 window.APP.directive('rupeeDisplay', function() {
   return {
-    template: '<div class="rupee-display">' +
-              '<span ng-show="purple"><img src="img/rupee-purple.png">{{ purple }}</span>' +
-              '<span ng-show="red"><img src="img/rupee-red.png">{{ red }}</span>' +
-              '<span ng-show="blue"><img ng-show="blue" src="img/rupee-blue.png">{{ blue }}</span>' +
-              '<span ng-show="green"><img ng-show="green" src="img/rupee-green.png">{{ green }}</span>' +
-              '</div>',
+    template: '<div class="rupee-display"></div>',
     link: zelda,
     replace: true,
     scope: true,
@@ -348,17 +343,28 @@ window.APP.directive('rupeeDisplay', function() {
 
     function refresh() {
       var total = $scope.$eval(attrs.rupeeCount);
+      elem[0].innerHTML = "";
 
-      $scope.purple = Math.floor(total / 50);
-      total -= $scope.purple * 50;
+      var purple = Math.floor(total / 50);
+      total -= purple * 50;
+      makeImgs(purple, "purple");
 
-      $scope.red = Math.floor(total / 20);
-      total -= $scope.red * 20;
+      var red = Math.floor(total / 20);
+      total -= red * 20;
+      makeImgs(red, "red");
 
-      $scope.blue = Math.floor(total / 5);
-      total -= $scope.blue * 5;
+      var blue = Math.floor(total / 5);
+      total -= blue * 5;
+      makeImgs(blue, "blue");
 
-      $scope.green = total;
+      var green = total;
+      makeImgs(green, "green");
+
+      function makeImgs(count, color_name) {
+        for (var i = 0; i < count; i++) {
+          elem.append('<img src="img/rupee-' + color_name + '.png">');
+        }
+      }
     }
   }
 });
