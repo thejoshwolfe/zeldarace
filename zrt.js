@@ -240,10 +240,21 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
       return alert(e);
     }
     loadState(state);
+    saveState();
     hideState();
   };
 
+  function sortPeople() {
+    // reorder everyone according to their wealth
+    $scope.state.people.sort(function(a, b) {
+      a = $scope.totalRupees(a);
+      b = $scope.totalRupees(b);
+      return a<b ? 1 : a>b ? -1 : 0;
+    });
+  }
+
   function saveState() {
+    sortPeople();
     localStorage.state = window.angular.toJson($scope.state);
   }
 
@@ -257,6 +268,7 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
       $scope.state.checkpoints.forEach(function(checkpoint) {
         if (checkpoint.start) checkpoint.start = new Date(checkpoint.start);
       });
+      sortPeople();
     }
   }
 
