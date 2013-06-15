@@ -11,9 +11,29 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
         profile_img: "img/faces/andy.png",
       },
       {
+        name: "James",
+        times: [],
+        profile_img: "img/faces/james.png",
+      },
+      {
+        name: "Sam",
+        times: [],
+        profile_img: "img/faces/sam.png",
+      },
+      {
+        name: "Kyle",
+        times: [],
+        profile_img: "img/faces/kyle.png",
+      },
+      {
         name: "Josh",
         times: [],
         profile_img: "img/faces/josh_wolfe.png",
+      },
+      {
+        name: "Mike",
+        times: [],
+        profile_img: "img/faces/mike.png",
       },
     ],
     gameState: 'setup',
@@ -301,6 +321,7 @@ window.APP.filter('formatMs', function() {
 window.APP.directive('rupeeDisplay', function() {
   return {
     template: '<div class="rupee-display">' +
+              '<span ng-show="purple"><img src="img/rupee-purple.png">{{ purple }}</span>' +
               '<span ng-show="red"><img src="img/rupee-red.png">{{ red }}</span>' +
               '<span ng-show="blue"><img ng-show="blue" src="img/rupee-blue.png">{{ blue }}</span>' +
               '<span ng-show="green"><img ng-show="green" src="img/rupee-green.png">{{ green }}</span>' +
@@ -315,10 +336,14 @@ window.APP.directive('rupeeDisplay', function() {
 
     function refresh() {
       var total = $scope.$eval(attrs.rupeeCount);
+
+      $scope.purple = Math.floor(total / 50);
+      total -= $scope.purple * 50;
+
       $scope.red = Math.floor(total / 20);
       total -= $scope.red * 20;
 
-      $scope.blue = Math.floor((total - $scope.red * 20) / 5);
+      $scope.blue = Math.floor(total / 5);
       total -= $scope.blue * 5;
 
       $scope.green = total;
