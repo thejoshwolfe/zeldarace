@@ -253,6 +253,18 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
     });
   }
 
+  $scope.rank = function(index) {
+    switch (index) {
+      case 0: return "1st";
+      case 1: return "2nd";
+      case 2: return "3rd";
+      case 20: return "21st";
+      case 21: return "22nd";
+      case 22: return "23rd";
+      default: return (index + 1) + "th";
+    }
+  };
+
   function saveState() {
     sortPeople();
     localStorage.state = window.angular.toJson($scope.state);
