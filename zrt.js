@@ -34,9 +34,14 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
         profile_img: "img/faces/josh_wolfe.png",
       },
       {
-        name: "Mike",
+        name: "Lukas",
         times: [],
-        profile_img: "img/faces/mike.png",
+        profile_img: "http://media.steampowered.com/steamcommunity/public/images/avatars/22/22810a6ecd7c4532209c4606ae0b9d95bc5898db_full.jpg",
+      },
+      {
+        name: "Nate",
+        times: [],
+        profile_img: "http://media.steampowered.com/steamcommunity/public/images/avatars/2b/2b04fb359bf76f01c0fa4d805ad5074f6e8e9383_full.jpg",
       },
     ],
     gameState: 'setup',
@@ -47,44 +52,29 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
         desc: "Pause after the Deku Tree's speech.",
       },
       {
+        name: "Enger Dodongo",
+        img_src: "img/bomb_flower.png",
+        desc: "Pause after you get it.",
+      },
+      {
         name: "Dodongo's Cavern",
         img_src: "img/goron_stone.png",
         desc: "Pause after Darunia's speech.",
       },
       {
-        name: "Adult Link",
-        img_src: "img/multi_award.png",
+        name: "Enter Jabu",
+        img_src: "img/fish.gif",
+        desc: "Pause after the lookaround cutscene.",
+      },
+      {
+        name: "Jabu Jabu",
+        img_src: "img/Zora's_Sapphire.png",
+        desc: "Pause after the lookaround cutscene.",
+      },
+      {
+        name: "Master Sword",
+        img_src: "img/Light_Medallion.png",
         desc: "Pause after speaking to Shiek.",
-      },
-      {
-        name: "Forest Temple",
-        img_src: "img/Forest_Medallion.png",
-        desc: "Pause after speaking to the Deku seed.",
-      },
-      {
-        name: "Fire Temple",
-        img_src: "img/Fire_Medallion.png",
-        desc: "Pause after you receive the Fire Medallion.",
-      },
-      {
-        name: "Water Temple",
-        img_src: "img/Water_Medallion.png",
-        desc: "Pause after talking to Shiek at Lake Hylia.",
-      },
-      {
-        name: "Shadow Temple",
-        img_src: "img/Shadow_Medallion.png",
-        desc: "Pause after you receive the Shadow Medallion.",
-      },
-      {
-        name: "Spirit Temple",
-        img_src: "img/Spirit_Medallion.png",
-        desc: "Pause after you receive the Spirit Medallion.",
-      },
-      {
-        name: "Ganon's Castle",
-        img_src: "img/triforce.png",
-        desc: "Hit the timer at the \"The End\" screen.",
       },
     ],
     current_checkpoint: 0,
@@ -348,9 +338,9 @@ window.APP = window.angular.module('main', []).controller('MainCtrl', function($
   function currentTitle() {
     if ($scope.state.gameState === "play") {
       var checkpoint = $scope.currentCheckpoint();
-      return checkpoint.name + " - Zelda Race - ";
+      return checkpoint.name + " - elda Race - ";
     } else {
-      return "Zelda Race - ";
+      return "elda Race - ";
     }
   }
 
